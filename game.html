@@ -7,42 +7,139 @@
     </head>
     <body>
         <button id="breed">Breed the rats</button>
+        <div id="rat-container">
+
+        </div>
         <script>
-             function parentRat1() {
-                let eyeColor = Math.random() > 0.5 ? 'red' : 'black';
-                let furColor = Math.random() > 0.5 ? 'gray' : 'white';
-                let gender = Math.random() > 0.5 ? 'male' : 'female';
-
-                return { eyeColor, furColor, gender }; // Return an object with properties
+            // Creates male parent rat object "parent rat 1"
+             let parentRat1 = {
+                eyeColor: Math.random() > 0.5 ? 'red' : 'black',
+                furColor: Math.random() > 0.5 ? 'gray' : 'white',
+                gender: 'male'
             }
 
-            function parentRat2(parent1Gender) {
-                let eyeColor = Math.random() > 0.5 ? 'red' : 'black';
-                let furColor = Math.random() > 0.5 ? 'gray' : 'white';
-
-                // Ensure parentRat2 has opposite gender of parentRat1
-                let gender = parent1Gender === 'male' ? 'female' : 'male';
-
-                return { eyeColor, furColor, gender };
-            }
-
-            // Create parent rats and store their data
-            let rat1 = parentRat1();
-            let rat2 = parentRat2(rat1.gender);
-
-            // Print their properties
-            console.log(rat1);
-            console.log(rat2);
-            document.getElementById('breed').addEventListener('click', breedRats() );
-                function babyRat(){
-                    if(rat1.eyeColor === 'red' && rat2.eyeColor === 'red'){
-                        let eyeColor = 'red';
-                    } else if(rat1.eyeColor === 'black' && rat2.eyeColor === 'black'){
-                        let eyeColor = 'black';
+            //finds the corresponding image for the parent rat 1
+            function findRat1Image() {
+                if (parentRat1.eyeColor === 'red') {
+                    if (parentRat1.furColor === 'gray') {
+                        return 'grayratredeyes.png';
                     } else {
-                        let eyeColor = Math.random() > 0.5 ? 'red' : 'black';
+                        return 'whiteratredeyes.png';
+                    }
+                } else {
+                    if (parentRat1.eyeColor === 'black') {
+                        if (parentRat1.furColor === 'gray') {
+                            return 'grayratblackeyes.png';
+                        } else {
+                            return 'whiteratblackeyes.png';
+                        }
                     }
                 }
+            }
+
+            //creates the image element for parent rat 1
+            let rat1image = document.createElement('img');
+            let container = document.getElementById('rat-container');
+            rat1image.src = findRat1Image();
+            rat1image.width = 100;
+            rat1image.style.border = "3px solid #2debd8";
+            rat1image.style.borderRadius = "5%";
+            rat1image.style.margin = "10px";
+            container.appendChild(rat1image);
+
+            //Creates female parent rat object "parent rat 2"
+            let parentRat2 = {
+                eyeColor: Math.random() > 0.5 ? 'red' : 'black',
+                furColor: Math.random() > 0.5 ? 'gray' : 'white',
+                gender: 'female'
+            }
+            //finds the corresponding image for parent rat 2
+            function findRat2Image() {
+                if (parentRat2.eyeColor === 'red') {
+                    if (parentRat2.furColor === 'gray') {
+                        return 'grayratredeyes.png';
+                    } else {
+                        return 'whiteratredeyes.png';
+                    }
+                } else {
+                    if (parentRat2.eyeColor === 'black') {
+                        if (parentRat2.furColor === 'gray') {
+                            return 'grayratblackeyes.png';
+                        } else {
+                            return 'whiteratblackeyes.png';
+                        }
+                    }
+                }
+            }
+
+            //creates the image element for parent rat 2
+            let rat2image = document.createElement('img');
+            rat2image.src = findRat2Image();
+            rat2image.width = 100;
+            rat2image.style.border = "3px solid #f558ac";
+            rat2image.style.borderRadius = "5%";
+            rat2image.style.margin = "10px";
+            container.appendChild(rat2image);
+
+            // Print their properties
+            console.log(parentRat1);
+            console.log(parentRat2);
+
+            //Button that breeds the parent rats
+            document.getElementById('breed').addEventListener("click", function() {
+    let eyeColor;
+    if (parentRat1.eyeColor === 'red' && parentRat2.eyeColor === 'red') {
+        eyeColor = 'red';
+    } else if (parentRat1.eyeColor === 'black' && parentRat2.eyeColor === 'black') {
+        eyeColor = 'black';
+    } else {
+        eyeColor = Math.random() > 0.5 ? 'red' : 'black';
+    }
+
+    let furColor;
+    if (parentRat1.furColor === 'gray' && parentRat2.furColor === 'gray') {
+        furColor = 'gray';
+    } else if (parentRat1.furColor === 'white' && parentRat2.furColor === 'white') {
+        furColor = 'white';
+    } else {
+        furColor = Math.random() > 0.5 ? 'gray' : 'white';
+    }
+
+    let childRat = {
+        eyeColor: eyeColor,
+        furColor: furColor,
+        gender: Math.random() > 0.5 ? 'male' : 'female'
+    };
+    console.log(childRat);
+    function findChildImage() {
+        if (childRat.eyeColor === 'red') {
+            if (childRat.furColor === 'gray') {
+                return 'grayratredeyes.png';
+            } else {
+                return 'whiteratredeyes.png';
+            }
+        } else {
+            if (childRat.eyeColor === 'black') {
+                if (childRat.furColor === 'gray') {
+                    return 'grayratblackeyes.png';
+                } else {
+                    return 'whiteratblackeyes.png';
+                }
+            }
+        }
+    }
+    function findChildGender() {
+    return childRat.gender === "female" ? "3px solid #f558ac" : "3px solid #2debd8";
+}
+    let childImage = document.createElement('img');
+    childImage.src = findChildImage();
+    childImage.width = 100;
+    childImage.style.border = findChildGender();
+    childImage.style.borderRadius = "5%";
+    childImage.style.margin = "10px";
+    container.appendChild(childImage);
+});
+
         </script>
     </body>
 </html>
