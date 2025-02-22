@@ -1,0 +1,31 @@
+body {
+    background-color:#1c1c1c;
+    color:azure;
+    font-family: sans-serif;
+}
+.header {
+    padding:10px;
+    text-align:center;
+}
+
+#start-button{
+    background-color: azure;
+    color:#1c1c1c;
+    padding:10px;
+    border-radius:5px;
+    font-size:20px;
+    width:100px;
+    font-family: helvetica;
+    margin: 0;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+    text-align:center;
+}
+#start-message{
+    text-align:center;
+    font-size:20px;
+    margin-top: 50px;
+}

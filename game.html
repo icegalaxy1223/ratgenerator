@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Rat Generator</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <link rel="icon" href="rat.png">
+    </head>
+    <body>
+        <button id="breed">Breed the rats</button>
+        <script>
+             function parentRat1() {
+                let eyeColor = Math.random() > 0.5 ? 'red' : 'black';
+                let furColor = Math.random() > 0.5 ? 'gray' : 'white';
+                let gender = Math.random() > 0.5 ? 'male' : 'female';
+
+                return { eyeColor, furColor, gender }; // Return an object with properties
+            }
+
+            function parentRat2(parent1Gender) {
+                let eyeColor = Math.random() > 0.5 ? 'red' : 'black';
+                let furColor = Math.random() > 0.5 ? 'gray' : 'white';
+
+                // Ensure parentRat2 has opposite gender of parentRat1
+                let gender = parent1Gender === 'male' ? 'female' : 'male';
+
+                return { eyeColor, furColor, gender };
+            }
+
+            // Create parent rats and store their data
+            let rat1 = parentRat1();
+            let rat2 = parentRat2(rat1.gender);
+
+            // Print their properties
+            console.log(rat1);
+            console.log(rat2);
+            document.getElementById('breed').addEventListener('click', breedRats() );
+                function babyRat(){
+                    if(rat1.eyeColor === 'red' && rat2.eyeColor === 'red'){
+                        let eyeColor = 'red';
+                    } else if(rat1.eyeColor === 'black' && rat2.eyeColor === 'black'){
+                        let eyeColor = 'black';
+                    } else {
+                        let eyeColor = Math.random() > 0.5 ? 'red' : 'black';
+                    }
+                }
+        </script>
+    </body>
+</html>
