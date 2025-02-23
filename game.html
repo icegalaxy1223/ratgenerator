@@ -7,16 +7,24 @@
     </head>
     <body>
         <button id="breed">Breed the rats</button>
+        <button id="breedtest">Breed other rats</button>
         <div id="rat-container">
 
         </div>
         <script>
+            const maleRats = [];
+            const femaleRats = [];
             // Creates male parent rat object "parent rat 1"
              let parentRat1 = {
+                name: "Male Progenitor",
                 eyeColor: Math.random() > 0.5 ? 'red' : 'black',
                 furColor: Math.random() > 0.5 ? 'gray' : 'white',
                 gender: 'male'
+                
             }
+
+            //Adds the male progenitor to the male rats array
+            maleRats.push(parentRat1);
 
             //finds the corresponding image for the parent rat 1
             function findRat1Image() {
@@ -49,10 +57,15 @@
 
             //Creates female parent rat object "parent rat 2"
             let parentRat2 = {
+                name: "Female Progenitor",
                 eyeColor: Math.random() > 0.5 ? 'red' : 'black',
                 furColor: Math.random() > 0.5 ? 'gray' : 'white',
                 gender: 'female'
             }
+
+            //Adds the female progenitor to the female rats array
+            femaleRats.push(parentRat2);
+
             //finds the corresponding image for parent rat 2
             function findRat2Image() {
                 if (parentRat2.eyeColor === 'red') {
@@ -104,13 +117,24 @@
     } else {
         furColor = Math.random() > 0.5 ? 'gray' : 'white';
     }
-
+    var ratName = prompt("A new rat has been born! Give it a name: ");
     let childRat = {
+        name: ratName,
         eyeColor: eyeColor,
         furColor: furColor,
         gender: Math.random() > 0.5 ? 'male' : 'female'
     };
+
+    // Print the child rat's properties
     console.log(childRat);
+
+    // Add the child rat to the appropriate array
+    if (childRat.gender === 'female') {
+        femaleRats.push(childRat.name);
+    } else {
+        maleRats.push(childRat.name);
+    }
+
     function findChildImage() {
         if (childRat.eyeColor === 'red') {
             if (childRat.furColor === 'gray') {
@@ -138,8 +162,58 @@
     childImage.style.borderRadius = "5%";
     childImage.style.margin = "10px";
     container.appendChild(childImage);
-});
 
+});
+function wildRat(){
+    alert("A wild rat has appeared!");
+    let wildRatName = prompt("Give it a name: ");
+    let wildRat = {
+        name: wildRatName,
+        eyeColor: Math.random() > 0.5 ? 'red' : 'black',
+        furColor: Math.random() > 0.5 ? 'gray' : 'white',
+        gender: Math.random() > 0.5 ? 'male' : 'female'
+}
+function findWildRatImage() {
+    if (wildRat.eyeColor === 'red') {
+        if (wildRat.furColor === 'gray') {
+            return 'grayratredeyes.png';
+        } else {
+            return 'whiteratredeyes.png';
+        }
+    } else {
+        if (wildRat.eyeColor === 'black') {
+            if (wildRat.furColor === 'gray') {
+                return 'grayratblackeyes.png';
+            } else {
+                return 'whiteratblackeyes.png';
+            }
+        }
+    }
+}
+function findWildRatGender(){
+    return wildRat.gender === "female" ? "3px solid #f558ac" : "3px solid #2debd8";
+}
+console.log(wildRat);
+let wildRatImage = document.createElement('img');
+wildRatImage.src = findWildRatImage();
+wildRatImage.width = 100;
+wildRatImage.style.border = findWildRatGender();
+wildRatImage.style.borderRadius = "5%";
+wildRatImage.style.margin = "10px";
+container.appendChild(wildRatImage);
+}
+function ratInterval(){
+    setInterval(Math.random() > .25 ? wildRat : wildRat, 300000);
+}
+ratInterval();
+
+// future plans with this, add a button that breeds rats other than the progenitors, figure out how to get the specific id of a rat object :,)
+//Button that breeds rats other than the progenitors
+document.getElementById('breedtest').addEventListener("click", function() {
+    let parent1 = prompt("Enter the name of the male rat you want to breed, here's a list of male rats: " + maleRats);
+    let parent2 = prompt("Enter the name of the female rat you want to breed, here's a list of female rats: " + femaleRats);
+
+});
         </script>
     </body>
 </html>
